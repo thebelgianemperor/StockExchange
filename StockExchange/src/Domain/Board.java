@@ -10,8 +10,9 @@ public class Board {
 	public Board(int size){
 		this.setSize(size);
 		this.board = new ArrayList<Minion>(this.getSize());
+		System.out.println();
 	}
-
+	
 	public int getSize() {
 		return size;
 	}
