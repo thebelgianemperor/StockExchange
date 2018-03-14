@@ -123,9 +123,9 @@ public class Game {
 	}
 	
 	//TODO: END AND START: think this through!
-	private void endTurn(Player player){
+	private void endTurn(){
 		//TODO: end-of-turn effects
-		if (player == this.player2){
+		if (this.getCurrentPlayer() == this.player2){
 			this.setTurn(this.getTurn() + 1);
 			this.setCurrentPlayer(this.player1);
 		}
