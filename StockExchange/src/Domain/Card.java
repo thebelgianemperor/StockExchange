@@ -7,9 +7,6 @@ public class Card {
 	private String name;
 	private int cost;
 	
-	/**
-	 * Abilities per card. Enum to identify possible effects.
-	 */
 	private List<Ability> abilities;
 
 	private boolean isOriginal;

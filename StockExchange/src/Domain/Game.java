@@ -67,6 +67,7 @@ public class Game {
 		
 		Card discardCard = this.shared.addToHand(sharedCard);
 		if (discardCard == null){
+			this.shared.addToHand(discardCard);
 			player.shared.addToHand(sharedCard);
 			return;
 		}
@@ -74,18 +75,21 @@ public class Game {
 		player.addToDiscard(discardCard);
 	}
 	
-	public void playCard(Hand hand, int index){
-		//TODO: remove from shared hand and player.shared hand
+	public void playCard(Player player, Hand hand, Card card){
+		
+		hand.removeFromHand(card);
+		if (player.shared.getHand().contains(card))
+			shared.removeFromHand(card);		
+		
+		if (card instanceof Minion){
+			//TODO: ask for boardposition
+			//TODO: add board + effects
+		}
+		else{
+			//TODO: effects
+		}
 	}
 	
-	/**
-	 * A minion attacks a minion.
-	 * 
-	 * @param index1
-	 * @param player1
-	 * @param index2
-	 * @param player2
-	 */
 	private void attackMinion(int index1, Player player1, int index2, Player player2){
 		Minion minion1 = player1.board.getMinionAt(index1);
 		Minion minion2 = player2.board.getMinionAt(index2);
@@ -94,23 +98,16 @@ public class Game {
 		minion2.setHealth(minion2.getHealth() - minion1.getAttack());
 	}
 	
-	/**
-	 * A minion attacks a player
-	 * 
-	 * @param index
-	 * @param player1
-	 * @param player2
-	 */
 	private void attackPlayer(int index, Player player1, Player player2){
 		Minion minion = player1.board.getMinionAt(index);
 		player2.setHealth(player2.getHealth() - minion.getAttack());
 	}
 	
 	private void addMinion(Player player, int index, Minion minion){
-		if (player.board.isFull())
-			return;
-		//TODO: full board
 		player.board.addMinion(index, minion);
+		
+		if (player.board.isFull())
+			killMinion(player, index);
 	}
 	
 	private Minion removeMinion(Player player, int index){
@@ -122,7 +119,6 @@ public class Game {
 		player.addToDiscard(discard);
 	}
 	
-	//TODO: END AND START: think this through!
 	private void endTurn(){
 		//TODO: end-of-turn effects
 		if (this.getCurrentPlayer() == this.player2){

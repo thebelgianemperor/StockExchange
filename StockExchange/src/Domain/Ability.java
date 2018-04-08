@@ -10,7 +10,6 @@ public enum Ability {
 	Spell,
 	Duration,
 	Attack,
-	Damage,
-	TakeDamage
+	Damage
 	
 }

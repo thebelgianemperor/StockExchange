@@ -39,9 +39,10 @@ public class Hand {
 		return null;
 	}
 	
-	public Card removeFromHand(int index){
-		Card card = this.getHand().get(index);
-		this.hand.remove(index);
+	public Card removeFromHand(Card card){
+		if (!this.getHand().contains(card))
+			throw new NullPointerException();
+		this.hand.remove(card);
 		this.hand.add(null);
 		return card;
 	}
